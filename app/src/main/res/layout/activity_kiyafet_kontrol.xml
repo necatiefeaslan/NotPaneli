@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KiyafetKontrolActivity">
+
+    <!-- Geri Butonu -->
+    <ImageButton
+        android:id="@+id/buttonGeri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_revert"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Geri"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"/>
+
+    <!-- Arama Çubuğu -->
+    <EditText
+        android:id="@+id/editTextOgrenciAra"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Öğrenci ara..."
+        android:drawableStart="@android:drawable/ic_menu_search"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/buttonGeri"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Başlık -->
+    <TextView
+        android:id="@+id/textViewBaslik"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kıyafet Kontrolü"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#1976D2"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/editTextOgrenciAra"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Açıklama -->
+    <TextView
+        android:id="@+id/textViewAciklama"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Bu ekranda öğrencilerin kıyafet kontrollerini yapabilirsiniz."
+        android:textSize="15sp"
+        android:textColor="#333"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/textViewBaslik"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Tümünü Uygun/Uygun Değil yap Switch'i -->
+    <Switch
+        android:id="@+id/switchTumunuUygunYap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tüm öğrencilerin kıyafetini değiştir"
+        app:layout_constraintTop_toBottomOf="@id/textViewAciklama"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewOgrenciler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonKaydet"
+        app:layout_constraintTop_toBottomOf="@id/switchTumunuUygunYap"
+        android:layout_margin="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonKaydet"
+        android:backgroundTint="#1976D2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Kaydet"
+        android:textColor="@color/white"
+        app:cornerRadius="8dp"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:padding="12dp"
+        app:icon="@android:drawable/ic_menu_save"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

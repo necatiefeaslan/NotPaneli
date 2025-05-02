@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/textViewOgrenciAdi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginEnd="8dp"/>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderPuan"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="100"
+            android:stepSize="1"
+            app:trackColorActive="@color/performans_slider_active"
+            app:trackColorInactive="@color/performans_slider_inactive"
+            app:thumbColor="@color/performans_slider_thumb"/>
+
+        <TextView
+            android:id="@+id/textViewPuan"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView> 
