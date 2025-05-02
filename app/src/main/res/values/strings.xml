@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NotPaneli</string>
     <string name="users_icon">Kullanıcılar ikonu</string>
+    <string name="rapor_icon">Rapor ikonu</string>
 </resources>

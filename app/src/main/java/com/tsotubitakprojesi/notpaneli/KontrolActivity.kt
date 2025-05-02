@@ -44,42 +44,52 @@ class KontrolActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewNotTipleri)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        notTipiAdapter = NotTipiAdapter(listOf()) { notTipi ->
-            when (notTipi.Adi) {
-                "Ödev Kontrolü" -> {
-                    val intent = Intent(this, OdevActivity::class.java).apply {
-                        putExtra("dersId", secilenDersId)
-                        putExtra("ogretmen", mevcutOgretmen)
-                        putExtra("notTipi", notTipi)
+        notTipiAdapter = NotTipiAdapter(listOf(),
+            onNotTipiClick = { notTipi ->
+                when (notTipi.Adi) {
+                    "Ödev Kontrolü" -> {
+                        val intent = Intent(this, OdevActivity::class.java).apply {
+                            putExtra("dersId", secilenDersId)
+                            putExtra("ogretmen", mevcutOgretmen)
+                            putExtra("notTipi", notTipi)
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
-                }
-                "Kıyafet Kontrolü" -> {
-                    val intent = Intent(this, KiyafetKontrolActivity::class.java).apply {
-                        putExtra("dersId", secilenDersId)
-                        putExtra("ogretmen", mevcutOgretmen)
-                        putExtra("notTipi", notTipi)
+                    "Kıyafet Kontrolü" -> {
+                        val intent = Intent(this, KiyafetKontrolActivity::class.java).apply {
+                            putExtra("dersId", secilenDersId)
+                            putExtra("ogretmen", mevcutOgretmen)
+                            putExtra("notTipi", notTipi)
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
-                }
-                "Uygulama Sinavi" -> {
-                    val intent = Intent(this, SinavActivity::class.java).apply {
-                        putExtra("dersId", secilenDersId)
-                        putExtra("ogretmen", mevcutOgretmen)
-                        putExtra("notTipi", notTipi)
+                    "Uygulama Sinavi" -> {
+                        val intent = Intent(this, SinavActivity::class.java).apply {
+                            putExtra("dersId", secilenDersId)
+                            putExtra("ogretmen", mevcutOgretmen)
+                            putExtra("notTipi", notTipi)
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
-                }
-                else -> {
-                    val intent = Intent(this, NotActivity::class.java).apply {
-                        putExtra("dersId", secilenDersId)
-                        putExtra("ogretmen", mevcutOgretmen)
-                        putExtra("notTipi", notTipi)
+                    else -> {
+                        val intent = Intent(this, NotActivity::class.java).apply {
+                            putExtra("dersId", secilenDersId)
+                            putExtra("ogretmen", mevcutOgretmen)
+                            putExtra("notTipi", notTipi)
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
                 }
+            },
+            onRaporClick = { notTipi ->
+                val intent = Intent(this, NotRaporActivity::class.java).apply {
+                    putExtra("notTipiId", notTipi.Id)
+                    putExtra("dersId", secilenDersId)
+                    putExtra("ogretmenId", mevcutOgretmen?.Id)
+                }
+                startActivity(intent)
             }
-        }
+        )
         recyclerView.adapter = notTipiAdapter
 
         notTipleriniGetir()
