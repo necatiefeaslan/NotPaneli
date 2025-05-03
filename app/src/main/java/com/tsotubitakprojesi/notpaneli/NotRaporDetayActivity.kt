@@ -48,10 +48,10 @@ class NotRaporDetayActivity : AppCompatActivity() {
                         .whereIn("NotOturumuId", oturumIdler)
                         .get()
                         .addOnSuccessListener { notlarDocs ->
-                            val notlar = mutableListOf<NotRaporDetayItem>()
                             val ogrenciIdSet = notlarDocs.mapNotNull { it.getString("OgrenciId") }.toSet()
                             db.collection("Ogrenci").whereIn("Id", ogrenciIdSet.toList()).get().addOnSuccessListener { ogrenciDocs ->
                                 val ogrenciAdMap = ogrenciDocs.associateBy({ it.id }, { it.getString("Adi") ?: "" })
+                                val ogrenciNotMap = mutableMapOf<String, MutableList<Int>>()
                                 for (notDoc in notlarDocs) {
                                     val ogrenciId = notDoc.getString("OgrenciId") ?: continue
                                     val puan = notDoc.getLong("Puan")?.toInt() ?: 0
@@ -59,8 +59,13 @@ class NotRaporDetayActivity : AppCompatActivity() {
                                     val tarihStr = tarih?.let { java.text.SimpleDateFormat("dd.MM.yyyy", java.util.Locale.getDefault()).format(it) } ?: ""
                                     if (tarihStr == secilenTarih) {
                                         val ogrenciAdi = ogrenciAdMap[ogrenciId] ?: ""
-                                        notlar.add(NotRaporDetayItem(ogrenciAdi, puan))
+                                        if (ogrenciAdi.isNotEmpty()) {
+                                            ogrenciNotMap.getOrPut(ogrenciAdi) { mutableListOf() }.add(puan)
+                                        }
                                     }
+                                }
+                                val notlar = ogrenciNotMap.map { (ogrenciAdi, puanlar) ->
+                                    NotRaporDetayItem(ogrenciAdi, puanlar)
                                 }
                                 recyclerView.adapter = NotRaporDetayAdapter(notlar)
                             }
@@ -74,5 +79,5 @@ class NotRaporDetayActivity : AppCompatActivity() {
 
 data class NotRaporDetayItem(
     val ogrenciAdi: String,
-    val puan: Int
+    val puanlar: List<Int>
 ) 

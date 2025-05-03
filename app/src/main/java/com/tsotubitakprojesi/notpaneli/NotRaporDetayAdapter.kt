@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class NotRaporDetayAdapter(private val notlar: List<NotRaporDetayItem>) : RecyclerView.Adapter<NotRaporDetayAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textPuanBadge: TextView = view.findViewById(R.id.textPuanBadge)
         val textOgrenciAdi: TextView = view.findViewById(R.id.textOgrenciAdi)
-        val textPuan: TextView = view.findViewById(R.id.textPuan)
+        val textPuanlar: TextView = view.findViewById(R.id.textPuanlar)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,8 +20,9 @@ class NotRaporDetayAdapter(private val notlar: List<NotRaporDetayItem>) : Recycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = notlar[position]
+        holder.textPuanBadge.text = item.puanlar.firstOrNull()?.toString() ?: ""
         holder.textOgrenciAdi.text = item.ogrenciAdi
-        holder.textPuan.text = item.puan.toString()
+        holder.textPuanlar.text = "Tüm Puanlar: ${item.puanlar.joinToString(", ")}"
     }
 
     override fun getItemCount() = notlar.size

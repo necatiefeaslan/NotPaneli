@@ -3,6 +3,7 @@ package com.tsotubitakprojesi.notpaneli
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
@@ -15,6 +16,7 @@ class NotRaporAdapter(
 ) : RecyclerView.Adapter<NotRaporAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textTarih: TextView = view.findViewById(R.id.textTarih)
+        val imageTarihIcon: ImageView = view.findViewById(R.id.imageTarihIcon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -67,7 +67,9 @@ class NotRaporActivity : AppCompatActivity() {
                                     val tarih = notDoc.getTimestamp("OlusturulmaTarihi")?.toDate()
                                     val tarihStr = tarih?.let { java.text.SimpleDateFormat("dd.MM.yyyy", java.util.Locale.getDefault()).format(it) } ?: ""
                                     if (tarihStr.isNotEmpty() && eklenenTarihler.add(tarihStr)) {
-                                        notlar.add(NotRaporItem("", 0, tarihStr))
+                                        val ogrenciAdi = ogrenciAdMap[notDoc.getString("OgrenciId")] ?: ""
+                                        val puan = notDoc.getDouble("Puan")?.toInt() ?: 0
+                                        notlar.add(NotRaporItem(ogrenciAdi, puan, tarihStr))
                                     }
                                 }
                                 recyclerView.adapter = NotRaporAdapter(notlar) { secilenTarih ->
