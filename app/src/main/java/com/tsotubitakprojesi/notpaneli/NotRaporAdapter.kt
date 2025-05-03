@@ -9,10 +9,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 // Model: Öğrenci adı, puan, tarih
-class NotRaporAdapter(private val notlar: List<NotRaporItem>) : RecyclerView.Adapter<NotRaporAdapter.ViewHolder>() {
+class NotRaporAdapter(
+    private val notlar: List<NotRaporItem>,
+    private val onTarihClick: (String) -> Unit
+) : RecyclerView.Adapter<NotRaporAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textOgrenciAdi: TextView = view.findViewById(R.id.textOgrenciAdi)
-        val textPuan: TextView = view.findViewById(R.id.textPuan)
         val textTarih: TextView = view.findViewById(R.id.textTarih)
     }
 
@@ -23,9 +24,12 @@ class NotRaporAdapter(private val notlar: List<NotRaporItem>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = notlar[position]
-        holder.textOgrenciAdi.text = item.ogrenciAdi
-        holder.textPuan.text = item.puan.toString()
         holder.textTarih.text = item.tarih
+        val clickListener = View.OnClickListener {
+            onTarihClick(item.tarih)
+        }
+        holder.textTarih.setOnClickListener(clickListener)
+        holder.itemView.setOnClickListener(clickListener)
     }
 
     override fun getItemCount() = notlar.size

@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.Slider
 
-class OgrenciPuanAdapter(private val ogrenciler: List<Ogrenci>) : RecyclerView.Adapter<OgrenciPuanAdapter.ViewHolder>() {
+class OgrenciPuanAdapter(private val ogrenciler: List<Ogrenci>, private val layoutId: Int) : RecyclerView.Adapter<OgrenciPuanAdapter.ViewHolder>() {
     private val puanlar = mutableMapOf<String, Int>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -17,7 +17,7 @@ class OgrenciPuanAdapter(private val ogrenciler: List<Ogrenci>) : RecyclerView.A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_performans_ogrenci, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return ViewHolder(view)
     }
 

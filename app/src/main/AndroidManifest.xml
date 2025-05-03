@@ -39,6 +39,7 @@
             android:name=".SinavActivity"
             android:exported="false" />
         <activity android:name=".NotRaporActivity" />
+        <activity android:name=".NotRaporDetayActivity" />
     </application>
 
 </manifest>

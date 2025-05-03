@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Geçmiş Notlar"
-        android:textSize="22sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="#1976D2"
         android:gravity="center"

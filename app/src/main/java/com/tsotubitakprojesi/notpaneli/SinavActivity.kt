@@ -57,11 +57,12 @@ class SinavActivity : AppCompatActivity() {
 
         ogrencileriGetirVeListele()
 
+        switchTumunuYuzYap.isChecked = false
+
         kaydetButton.setOnClickListener {
             puanlariKaydet()
         }
 
-        // Switch dinleyicisini adapter oluşturulduktan sonra ekle
         switchTumunuYuzYap.setOnCheckedChangeListener { _, isChecked ->
             if (::adapter.isInitialized) {
                 if (isChecked) {
@@ -93,7 +94,6 @@ class SinavActivity : AppCompatActivity() {
                 }
                 adapter = SinavOgrenciAdapter(ogrenciler, this) { ogrenciId, puan ->
                     // Puan değiştiğinde yapılacak işlemler
-                    // Toast.makeText(this, "Öğrenci ID: $ogrenciId, Puan: $puan", Toast.LENGTH_SHORT).show()
                 }
                 recyclerView.adapter = adapter
             }

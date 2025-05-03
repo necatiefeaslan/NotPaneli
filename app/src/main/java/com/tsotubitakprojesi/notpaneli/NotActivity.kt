@@ -97,7 +97,13 @@ class NotActivity : AppCompatActivity() {
                         Telefon = doc.getString("Telefon")
                     )
                 }
-                ogrenciAdapter = OgrenciPuanAdapter(ogrenciler)
+                val layoutId = when (notTipi?.Adi) {
+                    "Ödev Kontrol" -> R.layout.item_odev_ogrenci
+                    "Performans" -> R.layout.item_performans_ogrenci
+                    // Diğer not tipleri için ekleme yapabilirsin
+                    else -> R.layout.item_performans_ogrenci
+                }
+                ogrenciAdapter = OgrenciPuanAdapter(ogrenciler, layoutId)
                 recyclerView.adapter = ogrenciAdapter
             }
         }

@@ -29,9 +29,19 @@ class SinavOgrenciAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val ogrenci = ogrenciler[position]
         holder.ogrenciAdi.text = ogrenci.Adi
+
+        val oldWatcher = holder.puanInput.getTag(R.id.editTextPuan) as? android.text.TextWatcher
+        if (oldWatcher != null) {
+            holder.puanInput.removeTextChangedListener(oldWatcher)
+        }
+
+        holder.puanInput.clearFocus()
+        holder.puanInput.isFocusable = false
         holder.puanInput.setText(puanlar[ogrenci.Id]?.toString() ?: "")
-        
-        holder.puanInput.addTextChangedListener(object : android.text.TextWatcher {
+        holder.puanInput.setSelection(holder.puanInput.text.length)
+        holder.puanInput.isFocusable = true
+
+        val watcher = object : android.text.TextWatcher {
             override fun afterTextChanged(s: android.text.Editable?) {
                 val puan = s?.toString()?.toIntOrNull() ?: 0
                 if (puan in 0..100) {
@@ -39,23 +49,15 @@ class SinavOgrenciAdapter(
                         puanlar[ogrenci.Id] = puan
                         onPuanChanged(ogrenci.Id, puan)
                     }
-                } else {
+                } else if (s?.isNotEmpty() == true) {
                     Toast.makeText(context, "Not 0-100 arasında olmalıdır!", Toast.LENGTH_SHORT).show()
-                    holder.puanInput.setText("0")
-                    puanlar[ogrenci.Id] = 0
-                    onPuanChanged(ogrenci.Id, 0)
                 }
             }
-            
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Kullanıcı 3 karakterden fazla girmeye çalışırsa engelle
-                if (s?.length ?: 0 >= 3 && after > 0) {
-                    holder.puanInput.setText(s?.subSequence(0, 3))
-                }
-            }
-            
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
+        }
+        holder.puanInput.addTextChangedListener(watcher)
+        holder.puanInput.setTag(R.id.editTextPuan, watcher)
     }
 
     override fun getItemCount() = ogrenciler.size
@@ -64,12 +66,10 @@ class SinavOgrenciAdapter(
 
     fun tumPuanlariAyarla(puan: Int) {
         if (puan in 0..100) {
-            ogrenciler.forEachIndexed { index, ogrenci ->
-                if (puanlar[ogrenci.Id] != puan) {
-                    puanlar[ogrenci.Id] = puan
-                    notifyItemChanged(index)
-                }
+            ogrenciler.forEach { ogrenci ->
+                puanlar[ogrenci.Id] = puan
             }
+            notifyDataSetChanged()
         } else {
             Toast.makeText(context, "Not 0-100 arasında olmalıdır!", Toast.LENGTH_SHORT).show()
         }

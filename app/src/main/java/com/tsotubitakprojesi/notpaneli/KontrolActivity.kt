@@ -47,7 +47,7 @@ class KontrolActivity : AppCompatActivity() {
         notTipiAdapter = NotTipiAdapter(listOf(),
             onNotTipiClick = { notTipi ->
                 when (notTipi.Adi) {
-                    "Ödev Kontrolü" -> {
+                    "Ödev Kontrol" -> {
                         val intent = Intent(this, OdevActivity::class.java).apply {
                             putExtra("dersId", secilenDersId)
                             putExtra("ogretmen", mevcutOgretmen)
@@ -55,7 +55,7 @@ class KontrolActivity : AppCompatActivity() {
                         }
                         startActivity(intent)
                     }
-                    "Kıyafet Kontrolü" -> {
+                    "Kıyafet Kontrol" -> {
                         val intent = Intent(this, KiyafetKontrolActivity::class.java).apply {
                             putExtra("dersId", secilenDersId)
                             putExtra("ogretmen", mevcutOgretmen)
@@ -63,7 +63,7 @@ class KontrolActivity : AppCompatActivity() {
                         }
                         startActivity(intent)
                     }
-                    "Uygulama Sinavi" -> {
+                    "Uygulama Sinavı" -> {
                         val intent = Intent(this, SinavActivity::class.java).apply {
                             putExtra("dersId", secilenDersId)
                             putExtra("ogretmen", mevcutOgretmen)
